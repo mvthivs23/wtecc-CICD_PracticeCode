@@ -30,6 +30,17 @@ jobs:
     -   name: Run unit tests with nose
         run: nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
 
+
+    -    name: Run Trivy vulnerability scanner in fs mode
+         uses: aquasecurity/trivy-action@master
+         with:
+          scan-type: 'fs'
+          hide-progress: false
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL'
+
   deploy:
     name: deploy
     runs-on: ubuntu-latest
